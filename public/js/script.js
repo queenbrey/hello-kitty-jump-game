@@ -1,35 +1,52 @@
-const hello = document.querySelector('.hello');
-const yut = document.querySelector('.yut');
+document.addEventListener('DOMContentLoaded', () => {
+    const backgroundMusic = document.getElementById('background-music');
+    const startButton = document.getElementById('start-game');
+    const scoreElement = document.getElementById('score');
+    let score = 0;
+    let gameLoop;
 
-const jump = () => {
-    hello.classList.add('jump');
+    const startGame = () => {
+        backgroundMusic.play();
+        startButton.style.display = 'none';
+        score = 0;
+        scoreElement.textContent = `Score: ${score}`;
+        gameLoop = setInterval(updateGame, 100);
+    };
 
-    setTimeout(() => {
+    startButton.addEventListener('click', startGame);
 
-    hello.classList.remove('jump');
+    const hello = document.querySelector('.hello');
+    const yut = document.querySelector('.yut');
 
-    } , 500)
-}
+    const jump = () => {
+        hello.classList.add('jump');
 
-const loop = setInterval(() => {
+        setTimeout(() => {
+            hello.classList.remove('jump');
+        }, 500);
+    };
 
-    const yutPosition = yut.offsetLeft;
-    const helloPosition = +window.getComputedStyle(hello).bottom.replace('px', '');
+    const updateGame = () => {
+        const yutPosition = yut.offsetLeft;
+        const helloPosition = +window.getComputedStyle(hello).bottom.replace('px', '');
 
-    if (yutPosition <= 55 && yutPosition > 0 && helloPosition < 65) {
+        if (yutPosition <= 55 && yutPosition > 0 && helloPosition < 65) {
+            yut.style.animation = 'none';
+            yut.style.left = `${yutPosition}px`;
 
-        yut.style.animation = 'none';
-        yut.style.left = `${yutPosition}px`;
+            hello.style.animation = 'none';
+            hello.style.bottom = `${helloPosition}px`;
 
-        hello.style.animation = 'none';
-        hello.style.bottom = `${helloPosition}px`;
+            hello.src = './images/game-over.gif';
+            hello.style.width = '100px';
+            hello.style.bottom = '75px';
 
-        hello.src = './images/game-over.gif';
-        hello.style.width = '100px'
-        hello.style.bottom = '75px'
+            clearInterval(gameLoop);
+        } else {
+            score++;
+            scoreElement.textContent = `Score: ${score}`;
+        }
+    };
 
-        clearInterval(loop);
-    } 
-}, 10)
-
-document.addEventListener('keydown', jump);
+    document.addEventListener('keydown', jump);
+});
