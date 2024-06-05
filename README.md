@@ -1,4 +1,3 @@
-
 <div align="center">
   <h1>🎀 Hello Kitty Jump 🎀</h1>
   <img width="400" src="https://github.com/LeoHeringer/hello-kitty-jump-game/assets/69641220/1beed990-fb9f-4b83-956f-5a1414518f80" alt="Hello Kitty Jump">
@@ -21,11 +20,17 @@ To play, simply press any key on the keyboard to make Hello Kitty jump. The goal
 
 1. Clone the repository:
 
-```
 git clone https://github.com/LeoHeringer/hello-kitty-jump-game.git
-```
 
-2. Open the `index.html` file in a compatible web browser to start the game.
+2. Install dependencies:
+
+npm install
+
+3. Start the server:
+
+npm start
+
+4. Open your web browser and go to [http://localhost:3000](http://localhost:3000) to play the game.
 
 ## Contribution
 
