@@ -7,28 +7,37 @@
 
 **Hello Kitty Jump** is a web game developed with HTML, CSS, and JavaScript, starring the iconic character Hello Kitty. In this simple and fun adventure, players control Hello Kitty as she jumps over clouds, avoiding obstacles along the way.
 
-## Key Features
+- **Description:** Hello Kitty Jump is a fun and captivating game where players control Hello Kitty, helping her jump and dodge obstacles to achieve the highest score possible.
+- **Technologies Used:** HTML, CSS, JavaScript
+- **Key Features:**
+  - Smooth and engaging animations.
+  - Intuitive and easy-to-use user interface.
+  - Simple controls with just one click or tap.
 
-- **Charming Graphics:** The game features colorful and detailed graphics that capture the playful essence of Hello Kitty.
-- **Intuitive Gameplay:** Simple controls allow players of all ages to easily engage in the gaming experience.
+### Featured Project
 
-## How to Play
+#### Portfolio Website
+- **Description:** My own portfolio website to showcase my projects and skills.
+- **Technologies:** HTML, CSS, JavaScript
 
-To play, simply press any key on the keyboard to make Hello Kitty jump. The goal is to avoid collisions with obstacles and keep Hello Kitty jumping for as long as possible.
-
+### Skills
+- Web Game Development
+- HTML5, CSS3, JavaScript
+- Frameworks: Phaser.js, Three.js
+- Responsive Design and UX/UI Design
 ## Installation and Execution
 
 1. Clone the repository:
 
-git clone https://github.com/LeoHeringer/hello-kitty-jump-game.git
+- git clone https://github.com/LeoHeringer/hello-kitty-jump-game.git
 
 2. Install dependencies:
 
-npm install
+- npm install
 
 3. Start the server:
 
-npm start
+- npm start
 
 4. Open your web browser and go to [http://localhost:3000](http://localhost:3000) to play the game.
 
