@@ -4,15 +4,39 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(white, palevioletred);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+#top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 .game-board {
     width: 100%;
-    height: 500px;
-    border-bottom: 15px solid palevioletred;
-    margin: 0 auto;
+    height: calc(100% - 80px); /* Ajusta a altura para deixar espaço para o top-bar */
+    border-top: 15px solid palevioletred; 
+    border-bottom: 15px solid palevioletred; 
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgb(237, 123, 205), white
-    );
+    background: linear-gradient(rgb(237, 123, 205), white);
 }
 
 .yut {
@@ -39,9 +63,6 @@
 }
 
 #score {
-    position: absolute;
-    top: 10px;
-    left: 10px;
     font-size: 24px;
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
@@ -49,11 +70,39 @@
     border-radius: 5px;
 }
 
+#start-game {
+    background-color: #ff69b4; 
+    color: #ffffff; 
+    border: none;
+    border-radius: 25px;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px #d62d75; 
+    transition: all 0.3s ease;
+}
+
+#start-game:hover {
+    background-color: #ff85c1; 
+    box-shadow: 0 6px #c2185b;
+}
+
+#start-game:active {
+    background-color: #ff509e; 
+    box-shadow: 0 2px #d62d75; 
+    transform: translateY(2px);
+}
+
+.hidden-text {
+    color: transparent; 
+    pointer-events: none; 
+}
+
 @keyframes yut-animation {
     from {
         right: -80px;
     }
-
     to {
         right: 100%;
     }
@@ -81,7 +130,6 @@
     from {
         right: -450px;
     }
-
     to {
         right: 100%;
     }
