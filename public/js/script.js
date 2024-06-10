@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const hello = document.querySelector('.hello');
     const yut = document.querySelector('.yut');
+    const batbat = document.querySelector('.batbat');
 
     const jump = () => {
         hello.classList.add('jump');
@@ -27,8 +28,21 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const updateGame = () => {
+        
         const yutPosition = yut.offsetLeft;
+        const batbatPosition = batbat.offsetLeft;
         const helloPosition = +window.getComputedStyle(hello).bottom.replace('px', '');
+
+        if (batbatPosition <= 85 && helloPosition < 65) {
+            clearInterval(gameLoop);
+        
+            batbat.style.animation = 'none';
+            batbat.style.left = `${batbatPosition}px`;
+
+            hello.src = './images/game-over.gif';
+            hello.style.width = '100px';
+            hello.style.bottom = '75px';
+        }
 
         if (yutPosition <= 55 && yutPosition > 0 && helloPosition < 65) {
             yut.style.animation = 'none';

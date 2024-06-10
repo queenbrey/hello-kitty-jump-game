@@ -52,6 +52,15 @@ body {
     bottom: 0;
 }
 
+.batbat {
+    position: absolute;
+    animation: batbat-animation 3s infinite linear;
+    width: 80px;
+    height: 80px;
+    bottom: 40px;
+}
+
+
 .jump {
     animation: jump 800ms ease-out;
 }
@@ -134,3 +143,13 @@ body {
         right: 100%;
     }
 }
+
+@keyframes batbat-animation {
+    from {
+        right: -80px;
+    }
+    to {
+        right: 100%;
+    }
+}
+
