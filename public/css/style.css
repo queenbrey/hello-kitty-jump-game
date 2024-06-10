@@ -31,7 +31,7 @@ body {
 
 .game-board {
     width: 100%;
-    height: calc(100% - 80px); /* Ajusta a altura para deixar espaço para o top-bar */
+    height: calc(100% - 80px);
     border-top: 15px solid palevioletred; 
     border-bottom: 15px solid palevioletred; 
     position: relative;
