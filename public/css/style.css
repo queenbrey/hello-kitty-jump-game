@@ -8,7 +8,7 @@ html, body {
     height: 100%;
     width: 100%;
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(white, palevioletred);
+    background: linear-gradient(135deg, #ff9ec6 0%, #ff6b9e 100%);
 }
 
 body {
@@ -25,25 +25,76 @@ body {
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #ff9ec6 0%, #ff6b9e 100%);
+    box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+}
+
+.name-input-container {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+#player-name {
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 150px;
+}
+
+#start-game, #leaderboard-btn, #reset-game {
+    font-family: 'Satisfy', cursive;
+    font-size: 24px;
+    color: white;
+    background: rgba(255,255,255,0.2);
+    border: 2px solid white;
+    border-radius: 50px;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+#name-input-modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#player-name-input {
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+}
+
+#start-with-name {
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .game-board {
     width: 100%;
     height: calc(100% - 80px);
-    border-top: 15px solid palevioletred; 
-    border-bottom: 15px solid palevioletred; 
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgb(237, 123, 205), white);
+    background: linear-gradient(rgb(105, 201, 240), rgb(201, 241, 248));
 }
 
 .yut {
     position: absolute;
     bottom: 0;
     width: 100px;
-    animation: yut-animation 2s infinite linear;
+    animation: yut-animation 1.5s infinite linear;
 }
 
 .hello {
@@ -54,33 +105,88 @@ body {
 
 .batbat {
     position: absolute;
-    animation: batbat-animation 3s infinite linear;
+    animation: batbat-animation 2s infinite linear;
     width: 80px;
     height: 80px;
     bottom: 40px;
 }
 
-
+/* Find the jumping animation section */
 .jump {
-    animation: jump 800ms ease-out;
+    animation: jump 0.5s ease;
+}
+
+@keyframes jump {
+    0% {
+        bottom: 0;
+    }
+    40% {
+        bottom: 180px;
+    }
+    50% {
+        bottom: 180px;
+    }
+    60% {
+        bottom: 180px;
+    }
+    100% {
+        bottom: 0;
+    }
+}
+
+/* Add this new animation for a smoother jump */
+.jump {
+    animation: smooth-jump 0.7s cubic-bezier(0.35, 0.5, 0.65, 1) forwards;
+}
+
+@keyframes smooth-jump {
+    0% {
+        bottom: 0;
+        transform: rotate(0deg);
+    }
+    25% {
+        bottom: 120px;
+        transform: rotate(-5deg);
+    }
+    50% {
+        bottom: 180px;
+        transform: rotate(0deg);
+    }
+    75% {
+        bottom: 120px;
+        transform: rotate(5deg);
+    }
+    100% {
+        bottom: 0;
+        transform: rotate(0deg);
+    }
 }
 
 .clouds {
     position: absolute;
     width: 450px;
-    animation: clouds-animation 20s infinite linear;
+    animation: clouds-animation 4s infinite linear;
+    bottom: 300px;
 }
 
 #score {
-    font-size: 24px;
+    font-family: 'Satisfy', cursive;
+    font-size: 28px;
     color: white;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 8px 15px;
+    border-radius: 50px;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+    min-width: 150px; /* Increase the minimum width */
+    width: 150px; /* Set a fixed width */
+    text-align: center;
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflow if score gets very large */
 }
 
-#start-game {
-    background-color: #ff69b4; 
+#start-game, #reset-game {
+    background-color: #ff65a0; 
     color: #ffffff; 
     border: none;
     border-radius: 25px;
@@ -88,26 +194,415 @@ body {
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 4px #d62d75; 
+    box-shadow: 0 4px #b16184; 
     transition: all 0.3s ease;
+    margin-left: 10px;
 }
 
-#start-game:hover {
-    background-color: #ff85c1; 
-    box-shadow: 0 6px #c2185b;
+#start-game:hover, #reset-game:hover {
+    background-color: #cf628c; 
+    box-shadow: 0 6px #6b3c50;
 }
 
-#start-game:active {
-    background-color: #ff509e; 
-    box-shadow: 0 2px #d62d75; 
+#start-game:active, #reset-game:active {
+    background-color: #fc5192; 
+    box-shadow: 0 2px #854963; 
     transform: translateY(2px);
+}
+
+#reset-game {
+    background-color: #ff65a0; /* A slightly different shade of pink */
+    box-shadow: 0 4px #b16184;
+}
+
+#reset-game:hover {
+    background-color: #cf628c;
+    box-shadow: 0 6px #6b3c50;
 }
 
 .hidden-text {
     color: transparent; 
     pointer-events: none; 
 }
+/* Leaderboard Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(255, 192, 203, 0.8);
+    backdrop-filter: blur(5px);
+}
 
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #ffecf5 0%, #ffd6eb 100%);
+    padding: 25px;
+    padding-top: 30px;
+    border-radius: 20px;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    max-height: 80vh;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+    border: 3px solid #ff9ec6;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 15px;
+    background: linear-gradient(90deg, 
+        #ff9ec6 0%, 
+        #ffb3d9 20%, 
+        #ffcce6 40%, 
+        #ffe6f2 60%, 
+        #ffcce6 80%, 
+        #ff9ec6 100%);
+}
+
+.close {
+    color: #ff69b4;
+    font-size: 32px;
+    font-weight: bold;
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    transition: all 0.3s;
+}
+
+.close:hover {
+    color: #e958a0;
+    transform: scale(1.2);
+}
+
+/* Cute title */
+.modal-content h2 {
+    position: absolute, center;
+    top: 10%;
+    font-family: 'Satisfy', cursive;
+    color: #e958a0;
+    font-size: 4rem;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Scrollable table container */
+.leaderboard-container {
+    max-height: 50vh;
+    overflow-y: auto;
+    padding: 0 10px;
+    margin: 20px 0; /* Added margin */
+    scrollbar-width: thin;
+    scrollbar-color: #ff9ec6 #ffe6f2;
+    /* Ensure content can scroll */
+    display: block;
+    height: auto;
+}
+/* Custom scrollbar */
+.leaderboard-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.leaderboard-container::-webkit-scrollbar-track {
+    background: #ffe6f2;
+    border-radius: 10px;
+}
+
+.leaderboard-container::-webkit-scrollbar-thumb {
+    background-color: #ff9ec6;
+    border-radius: 10px;
+}
+
+/* Cute table styles */
+#leaderboard-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    min-height: 100px;
+    font-family: 'Comic Neue', cursive;
+}
+
+#leaderboard-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+#leaderboard-table th {
+    background: linear-gradient(#ff9ec6, #ff69b4);
+    color: white;
+    padding: 12px 8px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+    border: none;
+}
+
+#leaderboard-table tr:nth-child(even) {
+    background-color: rgba(255, 214, 235, 0.5);
+}
+
+#leaderboard-table tr:nth-child(odd) {
+    background-color: rgba(255, 236, 245, 0.7);
+}
+
+#leaderboard-table tr:hover {
+    background-color: #ffd6eb;
+}
+
+#leaderboard-table td {
+    padding: 10px 8px;
+    border-bottom: 1px dashed #ffb3d9;
+    text-align: center;
+    font-size: 1rem;
+}
+
+/* Highlight top 3 scores */
+#leaderboard-table tr:first-child td {
+    background-color: #fffacd; /* Gold */
+    font-weight: bold;
+    color: #ff69b4;
+}
+
+#leaderboard-table tr:nth-child(2) td {
+    background-color: #e6e6fa; /* Silver */
+}
+
+#leaderboard-table tr:nth-child(3) td {
+    background-color: #ffdab9; /* Bronze */
+}
+
+/* Decorative elements */
+.modal-content::after {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #ff69b4;
+    font-size: 1.5rem;
+    opacity: 0.5;
+}
+
+.submit-score {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#player-name {
+    font-family: 'Comic Neue', cursive;
+    padding: 10px 15px;
+    border: 2px dashed #ffffff;
+    border-radius: 50px;
+    font-size: 16px;
+    width: 150px;
+    background-color: rgba(255,255,255,0.8);
+    color: #ff1493;
+    text-align: center;
+}
+#player-name::placeholder {
+    color: #ff9ec6;
+    opacity: 0.8;
+}
+
+#submit-score-btn {
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#game-title {
+    width: 100%;
+    text-align: center;
+    top: 20%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Satisfy', cursive;
+    font-size: 7rem;
+    color: #FF65A0;
+    text-shadow: 
+        3px 3px 0 white,
+        5px 5px 0 #ff69b4;
+    z-index: 10;
+    opacity: 1;
+    transition: opacity 0.5s;
+    animation: 
+        bounce 1s ease infinite alternate,
+        glow 2s ease infinite alternate;
+}
+
+/* Bouncing effect */
+@keyframes bounce {
+    from { transform: translate(-50%, -20px); }
+    to { transform: translate(-50%, 20px); }
+}
+
+/* Glow/pulse effect */
+@keyframes glow {
+    from { text-shadow: 
+        3px 3px 0 white,
+        5px 5px 0 #ff69b4; }
+    to { text-shadow: 
+        3px 3px 0 white,
+        5px 5px 0 #ff69b4,
+        0 0 20px #FF65A0; }
+}
+
+.hide-title {
+    opacity: 0 !important;
+    animation: none !important; /* Stop animations when hidden */
+}
+
+/* Hide during gameplay */
+.hide-title {
+    opacity: 0 !important;
+}
+
+#game-over-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Satisfy', cursive;
+    font-size: 8rem;
+    color: #ee0202;
+    text-shadow: 
+        3px 3px 0 rgb(41, 0, 0),
+        5px 5px 0 #807f7f;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    transition: opacity 0.8s ease-out;
+}
+
+.show-game-over {
+    opacity: 1 !important;
+    animation: 
+        gameOverDrop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+        gameOverGlow 2s ease-in-out infinite 0.8s;
+}
+
+/* Simple drop-down effect */
+@keyframes gameOverDrop {
+    0% {
+        transform: translate(-50%, -100vh);
+        opacity: 0;
+    }
+    80% {
+        transform: translate(-50%, -55%);
+    }
+    100% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+}
+
+/* Subtle glow effect */
+@keyframes gameOverGlow {
+    0%, 100% {
+        text-shadow: 
+            3px 3px 0 rgb(41, 0, 0),
+            5px 5px 0 #ffffff;
+    }
+    50% {
+        text-shadow: 
+            3px 3px 0 rgb(41, 0, 0),
+            5px 5px 0 #ffffff,
+            0 0 20px #ff0000;
+    }
+}
+
+/* Reuse your existing animations */
+@keyframes bounce {
+    from { transform: translate(-50%, -20px); }
+    to { transform: translate(-50%, 20px); }
+}
+
+@keyframes glow {
+    from { text-shadow: 
+        3px 3px 0 white,
+        5px 5px 0 #ff69b4; }
+    to { text-shadow: 
+        3px 3px 0 white,
+        5px 5px 0 #ff69b4,
+        0 0 20px #FF65A0; }
+}
+/* Pixel font import - choose one of these options */
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+
+
+/* Button styling */
+.pixel-button {
+
+    font-family: "Satisfy", cursive;
+    
+    font-size: 30px;
+    color: #e958a0; /* Pink text */
+    text-shadow: 2px 2px 0 #ffffff, /* White outline */
+                -1px -1px 0 #fff,
+                1px -1px 0 #fff,
+                -1px 1px 0 #fff;
+    
+    background-color: transparent;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+}
+
+/* Cute button effects */
+.pixel-button:hover {
+    transform: translateY(-2px);
+    color: #ff1493; /* Darker pink */
+}
+
+.pixel-button:active {
+    transform: translateY(1px);
+}
+
+/* Optional: Add a cute underline animation */
+.pixel-button::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 4px;
+    left: 12px;
+    background-color: #ff69b4;
+    transition: width 0.3s;
+}
+
+.pixel-button:hover::after {
+    width: calc(100% - 24px);
+}
 @keyframes yut-animation {
     from {
         right: -80px;
@@ -120,18 +615,87 @@ body {
 @keyframes jump {
     0% {
         bottom: 0;
+        transform: scale(1);
     }
     20% {
         bottom: 160px;
+        transform: scale(1);
+    }
+    25% {
+        bottom: 160px;
+        transform: scale(1);
+    }
+    30% {
+        bottom: 150px;
+        transform: scale(1);
+    }
+    35% {
+        bottom: 140px;
+        transform: scale(1);
+    }
+    40% {
+        bottom: 130px;
+        transform: scale(1);
+    }
+    45% {
+        bottom: 120px;
+        transform: scale(1);
     }
     50% {
-        bottom: 160px;
+        bottom: 110px;
+        transform: scale(1);
+    }
+    55% {
+        bottom: 100px;
+        transform: scale(1);
+    }
+    60% {
+        bottom: 90px;
+        transform: scale(1);
+    }
+    65% {
+        bottom: 80px;
+        transform: scale(1);
     }
     70% {
-        bottom: 0;
+        bottom: 70px;
+        transform: scale(1);
+    }
+    75% {
+        bottom: 60px;
+        transform: scale(1);
+    }
+    80% {
+        bottom: 50px;
+        transform: scale(1);
+    }
+    85% {
+        bottom: 40px;
+        transform: scale(1);
+    }
+    90% {
+        bottom: 30px;
+        transform: scale(1);
+    }
+    95% {
+        bottom: 15px;
+        transform: scale(1);
+    }
+    97% {
+        bottom: 5px;
+        transform: scale(1.1, 0.9);
+    }
+    98% {
+        bottom: 2px;
+        transform: scale(1.2, 0.8);
+    }
+    99% {
+        bottom: 0.5px;
+        transform: scale(1.1, 0.9);
     }
     100% {
         bottom: 0;
+        transform: scale(1);
     }
 }
 
@@ -153,3 +717,74 @@ body {
     }
 }
 
+/* Enhanced jump animation with more tilt */
+@keyframes jump {
+    0% {
+        bottom: 0;
+        transform: rotate(0deg);
+    }
+    20% {
+        bottom: 100px;
+        transform: rotate(-10deg);
+    }
+    40% {
+        bottom: 160px;
+        transform: rotate(-5deg);
+    }
+    50% {
+        bottom: 180px;
+        transform: rotate(0deg);
+    }
+    60% {
+        bottom: 160px;
+        transform: rotate(5deg);
+    }
+    80% {
+        bottom: 100px;
+        transform: rotate(10deg);
+    }
+    100% {
+        bottom: 0;
+        transform: rotate(0deg);
+    }
+}
+
+.jump {
+    animation: jump 0.7s cubic-bezier(0.35, 0.5, 0.65, 1) forwards;
+}
+
+/* Speed message styling */
+.speed-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Satisfy', cursive;
+    font-size: 3rem;
+    color: #ff65a0;
+    text-shadow: 
+        3px 3px 0 white,
+        5px 5px 0 #ff69b4;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+    text-align: center;
+    pointer-events: none;
+}
+
+.speed-message.show {
+    opacity: 1;
+    animation: speedMessagePop 0.5s ease-out;
+}
+
+@keyframes speedMessagePop {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    70% {
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}

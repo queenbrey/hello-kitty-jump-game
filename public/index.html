@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="./css/style.css">
-    <script src="./js/script.js" defer></script>
-
-    <title>Hello Kitty Jump</title>
+    <title>Hello Kitty Jump 🎀</title>
 </head>
+
 <body>
-    
     <div class="game-board">
         <img src="./images/clouds.png" class="clouds">
         <img src="./images/42Bx.gif" class="hello">
@@ -24,8 +22,43 @@
 
     <div id="top-bar">
         <div id="score">Score: 0</div>
-        <button id="start-game">Start Game</button>
+        <div class="name-input-container">
+            <input type="text" id="player-name" placeholder="Your name" maxlength="15">
+        </div>
+        <div class="button-container">
+            <button id="start-game">Start Game</button>
+            <button id="reset-game" style="display:none;">Play Again?</button>
+            <button id="leaderboard-btn" class="pixel-button cute-font">Leaderboard</button>
+        </div>
     </div>
-</body>
-</html>
 
+    <!-- Leaderboard Modal -->
+<div id="leaderboard-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Leaderboard</h2>
+        <div class="leaderboard-container">  <!-- Added container div -->
+            <table id="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-body"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    <script src="./js/leaderboard.js"></script>
+    <script src="./js/script.js"></script>
+    <div id="game-over-title" class="hidden">
+        Game Over!
+    </div>
+    <!-- Add this after the game-board div -->
+    <div id="speed-message" class="speed-message"></div>
+</body>
+<div id="game-title">Hello Kitty Jump</div>
+</html>
